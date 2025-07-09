@@ -1,7 +1,7 @@
 
 # recipe_app
 recipe_app
-=======
+
 # recipes_app
 
 A new Flutter project.
