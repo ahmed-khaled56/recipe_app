@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:recipes_app/widgets/ingredientRow.dart';
 
 class Categorycard extends StatelessWidget {
   final String area;

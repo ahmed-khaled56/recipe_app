@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class RecipeCard extends StatelessWidget {
+class RecipeCard extends StatefulWidget {
   //final Meal meal;
   final String area;
   final String image;
+  VoidCallback? onPressed;
 
   final String categoryName;
   final String maleName;
@@ -14,7 +15,15 @@ class RecipeCard extends StatelessWidget {
     required this.image,
     required this.categoryName,
     required this.maleName,
+    required this.onPressed,
   });
+
+  @override
+  State<RecipeCard> createState() => _RecipeCardState();
+}
+
+class _RecipeCardState extends State<RecipeCard> {
+  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +37,7 @@ class RecipeCard extends StatelessWidget {
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
             child: Image.network(
-              image,
+              widget.image,
               height: 120,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -38,7 +47,7 @@ class RecipeCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: Text(
-              maleName,
+              widget.maleName,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -50,9 +59,24 @@ class RecipeCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(categoryName, style: const TextStyle(fontSize: 12)),
-                Text(area, style: const TextStyle(fontSize: 12)),
+                Text(widget.categoryName, style: const TextStyle(fontSize: 12)),
+                Text(widget.area, style: const TextStyle(fontSize: 12)),
               ],
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.only(top: 30, left: 150),
+            child: IconButton(
+              icon: Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: isFavorite ? Colors.red : Colors.grey,
+              ),
+              onPressed: () {
+                setState(() {
+                  isFavorite = !isFavorite;
+                });
+              },
             ),
           ),
         ],

@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:recipes_app/screens/detailesScreen.dart';
 import 'package:recipes_app/widgets/MaleCard.dart';
 
-class Homegridview extends StatelessWidget {
+class Homegridview extends StatefulWidget {
   const Homegridview({super.key});
 
+  @override
+  State<Homegridview> createState() => _HomegridviewState();
+}
+
+class _HomegridviewState extends State<Homegridview> {
+  @override
+  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -27,6 +34,13 @@ class Homegridview extends StatelessWidget {
             // arguments: meal,
           },
           child: RecipeCard(
+            onPressed: () {
+              setState(() {
+                isFavorite = !isFavorite;
+              });
+            },
+
+            // isFavorite: isFavorite,
             image:
                 "https://www.themealdb.com/images/media/meals/xvsurr1511719182.jpg",
             maleName: "beqlawa",

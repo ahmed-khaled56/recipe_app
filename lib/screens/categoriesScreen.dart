@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:recipes_app/widgets/MaleCard.dart';
 import 'package:recipes_app/widgets/categoryCard.dart';
 
 class CategoriesScreen extends StatelessWidget {

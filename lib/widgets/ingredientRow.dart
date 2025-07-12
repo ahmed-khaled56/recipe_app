@@ -4,7 +4,7 @@ class Ingredientrow extends StatelessWidget {
   final int ingredientNum;
   final String ingrediantname;
 
-  Ingredientrow({
+  const Ingredientrow({
     super.key,
     required this.ingredientNum,
     required this.ingrediantname,
