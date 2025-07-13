@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:recipes_app/screens/detailesScreen.dart';
 import 'package:recipes_app/widgets/MaleCard.dart';
 
-class Homegridview extends StatefulWidget {
-  const Homegridview({super.key});
+class Malesgridview extends StatefulWidget {
+  const Malesgridview({super.key});
 
   @override
-  State<Homegridview> createState() => _HomegridviewState();
+  State<Malesgridview> createState() => _MalesgridviewState();
 }
 
-class _HomegridviewState extends State<Homegridview> {
+class _MalesgridviewState extends State<Malesgridview> {
   @override
   bool isFavorite = false;
   @override

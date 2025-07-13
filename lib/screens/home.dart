@@ -4,7 +4,7 @@ import 'package:recipes_app/screens/categoriesScreen.dart';
 import 'package:recipes_app/screens/favoritesscreen.dart';
 import 'package:recipes_app/services/List_categoriesService.dart';
 
-import 'package:recipes_app/widgets/homeGridview.dart';
+import 'package:recipes_app/widgets/MalesGridview.dart';
 import 'package:recipes_app/widgets/searchTextField.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Column(
-        children: [Searchtextfield(), Expanded(child: Homegridview())],
+        children: [Searchtextfield(), Expanded(child: Malesgridview())],
       ),
     );
   }

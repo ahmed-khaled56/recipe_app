@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipes_app/model/recipe_model.dart';
+import 'package:recipes_app/screens/One_categoryScreen.dart';
 import 'package:recipes_app/widgets/categoryCard.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -20,11 +21,20 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       body: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
-          return Categorycard(
-            categoryName: categoryList[index].nameCategory,
-            image: categoryList[index].imageCategory,
+          return Builder(
+            builder: (context) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, OneCategoryscreen.id);
+                },
+                child: Categorycard(
+                  categoryName: categoryList[index].nameCategory,
+                  image: categoryList[index].imageCategory,
 
-            descreption: categoryList[index].descriptionCategory,
+                  descreption: categoryList[index].descriptionCategory,
+                ),
+              );
+            },
           );
         },
       ),
