@@ -1,11 +1,59 @@
-// class recipeModel {
-//   final dynamic? idMeal;
-//   final dynamic? idMeal;
-//   final dynamic? idMeal;
-//   final dynamic? idMeal;
-//   final dynamic? idMeal;
+class MealModel {
+  final dynamic idMeal;
+  final dynamic mealName;
+  final dynamic categoryName;
+  final dynamic area;
+  final dynamic maleImage;
+  final dynamic descreption;
 
-// }
+  final List<String> ingerdiants;
+  final List<String> mesearus;
+  final dynamic youtubeLink;
+
+  MealModel({
+    required this.mesearus,
+    required this.youtubeLink,
+    required this.idMeal,
+    required this.mealName,
+    required this.categoryName,
+    required this.area,
+    required this.maleImage,
+    required this.descreption,
+    required this.ingerdiants,
+  });
+
+  factory MealModel.fromJson(json) {
+    // 1. نجمع المكونات ديناميكيًا
+    List<String> ingredientsList = [];
+
+    for (int i = 1; i <= 20; i++) {
+      final ingredient = json['strIngredient$i'];
+      if (ingredient != null && ingredient.toString().trim().isNotEmpty) {
+        ingredientsList.add(ingredient.toString().trim());
+      }
+    }
+    List<String> meseaursList = [];
+
+    for (int J = 1; J <= 20; J++) {
+      final mesearus = json['strMeasure$J'];
+      if (mesearus != null && mesearus.toString().trim().isNotEmpty) {
+        meseaursList.add(mesearus.toString().trim());
+      }
+    }
+    return MealModel(
+      idMeal: json['idMeal'],
+      mealName: json['strMeal'],
+      categoryName: json['strCategory'],
+      area: json['strArea'],
+      descreption: json['strInstructions'],
+      maleImage: json['strMealThumb'],
+      youtubeLink: json['strYoutube'] ?? '',
+      ingerdiants: ingredientsList,
+      mesearus: meseaursList,
+    );
+  }
+}
+///////////////////////////////////////////////////////
 
 class CategoryModel {
   final dynamic idCategory;
