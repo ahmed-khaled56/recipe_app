@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class RecipeCard extends StatefulWidget {
+class Malecardbody extends StatefulWidget {
   //final Meal meal;
   final String area;
   final String image;
@@ -9,7 +9,7 @@ class RecipeCard extends StatefulWidget {
   final String categoryName;
   final String maleName;
 
-  RecipeCard({
+  Malecardbody({
     super.key,
     required this.area,
     required this.image,
@@ -19,10 +19,10 @@ class RecipeCard extends StatefulWidget {
   });
 
   @override
-  State<RecipeCard> createState() => _RecipeCardState();
+  State<Malecardbody> createState() => _MalecardbodyState();
 }
 
-class _RecipeCardState extends State<RecipeCard> {
+class _MalecardbodyState extends State<Malecardbody> {
   bool isFavorite = false;
 
   @override
