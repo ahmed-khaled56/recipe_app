@@ -23,7 +23,6 @@ class MealModel {
   });
 
   factory MealModel.fromJson(json) {
-    // 1. نجمع المكونات ديناميكيًا
     List<String> ingredientsList = [];
 
     for (int i = 1; i <= 20; i++) {

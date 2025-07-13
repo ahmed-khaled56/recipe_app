@@ -7,6 +7,10 @@ class OneCategoryscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Column(children: [Expanded(child: Malesgridview())]));
+    return Scaffold(
+      appBar: AppBar(title: const Text('Meals ')),
+
+      body: Column(children: [Expanded(child: Malesgridview())]),
+    );
   }
 }
