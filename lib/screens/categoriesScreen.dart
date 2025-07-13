@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:recipes_app/model/recipe_model.dart';
 import 'package:recipes_app/widgets/categoryCard.dart';
 
-class CategoriesScreen extends StatelessWidget {
+class CategoriesScreen extends StatefulWidget {
+  static String id = "CategoriesScreen";
   const CategoriesScreen({super.key});
 
   @override
+  State<CategoriesScreen> createState() => _CategoriesScreenState();
+}
+
+class _CategoriesScreenState extends State<CategoriesScreen> {
+  @override
   Widget build(BuildContext context) {
+    List<dynamic> categoryList =
+        ModalRoute.of(context)!.settings.arguments as dynamic;
     return Scaffold(
       appBar: AppBar(title: Text('Categories')),
       body: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
           return Categorycard(
-            categoryName: "Beef",
-            image: 'https://www.themealdb.com/images/category/beef.png',
-            area: "Egypt",
-            descreption:
-                "with a total population of more than 19 billion as of 2011.[1] Humans commonly keep chickens as a source of food (consuming both their meat and eggs) and, more rarely, as pets.",
+            categoryName: categoryList[index].nameCategory,
+            image: categoryList[index].imageCategory,
+
+            descreption: categoryList[index].descriptionCategory,
           );
         },
       ),

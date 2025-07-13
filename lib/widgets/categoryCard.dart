@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Categorycard extends StatelessWidget {
-  final String area;
   final String image;
   final String descreption;
   final String categoryName;
 
   const Categorycard({
     super.key,
-    required this.area,
+
     required this.image,
     required this.descreption,
     required this.categoryName,
@@ -46,8 +45,6 @@ class Categorycard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(area, style: const TextStyle(color: Colors.grey)),
-                  const SizedBox(height: 6),
                   Text(categoryName, style: const TextStyle(fontSize: 18)),
                   const SizedBox(height: 12),
                   const Text(

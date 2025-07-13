@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:recipes_app/model/recipe_model.dart';
 import 'package:recipes_app/screens/categoriesScreen.dart';
 import 'package:recipes_app/screens/favoritesscreen.dart';
+import 'package:recipes_app/services/List_categoriesService.dart';
 
 import 'package:recipes_app/widgets/homeGridview.dart';
 import 'package:recipes_app/widgets/searchTextField.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+  static String id = "HomeScreen";
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +30,14 @@ class HomeScreen extends StatelessWidget {
           ),
           IconButton(
             icon: const Icon(Icons.category),
-            onPressed: () {
-              Navigator.push(
+            onPressed: () async {
+              List<dynamic> categoryList =
+                  await GetAllCategories().getAllCategories();
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const CategoriesScreen(),
-                ),
+
+                CategoriesScreen.id,
+                arguments: categoryList,
               );
             },
           ),

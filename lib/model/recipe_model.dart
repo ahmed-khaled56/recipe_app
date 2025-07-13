@@ -22,10 +22,10 @@ class CategoryModel {
 
   factory CategoryModel.fromJson(jsondata) {
     return CategoryModel(
-      idCategory: jsondata(['idCategory']),
-      nameCategory: jsondata(['strCategory']),
-      imageCategory: jsondata(['strCategoryThumb']),
-      descriptionCategory: jsondata(['strCategoryDescription']),
+      idCategory: jsondata['idCategory'],
+      nameCategory: jsondata['strCategory'],
+      imageCategory: jsondata['strCategoryThumb'],
+      descriptionCategory: jsondata['strCategoryDescription'],
     );
   }
 }
