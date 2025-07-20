@@ -44,29 +44,34 @@ class _MalecardbodyState extends State<Malecardbody> {
           ),
           // اسم الوصفة
           Padding(
-            padding: const EdgeInsets.all(8),
-            child: Text(
-              widget.maleName,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          // التصنيف والدولة
-          Padding(padding: const EdgeInsets.symmetric(horizontal: 8)),
-
-          Padding(
-            padding: const EdgeInsets.only(top: 30, left: 150),
-            child: IconButton(
-              icon: Icon(
-                isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: isFavorite ? Colors.red : Colors.grey,
-              ),
-              onPressed: () {
-                setState(() {
-                  isFavorite = !isFavorite;
-                });
-              },
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    widget.maleName,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                SizedBox(width: 2),
+                IconButton(
+                  icon: Icon(
+                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: isFavorite ? Colors.red : Colors.grey,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isFavorite = !isFavorite;
+                    });
+                  },
+                ),
+              ],
             ),
           ),
         ],
