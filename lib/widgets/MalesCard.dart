@@ -24,10 +24,8 @@ class _MalescardState extends State<Malescard> {
       },
 
       // isFavorite: isFavorite,
-      image: widget.oneCategory!.maleImage,
-      maleName: widget.oneCategory!.mealName,
-      categoryName: widget.oneCategory!.categoryName,
-      area: widget.oneCategory!.area,
+      image: widget.oneCategory!.imageMeal,
+      maleName: widget.oneCategory!.nameMeal,
     );
   }
 }
