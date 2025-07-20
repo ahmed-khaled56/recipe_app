@@ -4,7 +4,7 @@ import 'package:recipes_app/model/recipe_model.dart';
 class Getonecateugoryservice {
   Future<List<dynamic>> getOneCategory({required String categoryName}) async {
     Map<String, dynamic> onecategoryList = await API().get(
-      url: 'https://themealdb.com/api/json/v1/1/search.php?s=$categoryName',
+      url: "https://www.themealdb.com/api/json/v1/1/filter.php?c=$categoryName",
     );
 
     List<dynamic> oneCategoriesJson = onecategoryList["meals"];

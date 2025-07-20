@@ -20,7 +20,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     return Scaffold(
       appBar: AppBar(title: Text('Categories')),
       body: ListView.builder(
-        itemCount: 10,
+        itemCount: categoryList.length,
         itemBuilder: (context, index) {
           return Builder(
             builder: (context) {

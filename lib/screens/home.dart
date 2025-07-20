@@ -60,15 +60,15 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (context, i) {
                 // final Meal meal = dummyMeals[i];
                 return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DetailsScreen(),
-                      ),
-                    );
-                    // arguments: meal,
-                  },
+                  // onTap: () {
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const DetailsScreen(),
+                  //     ),
+                  //   );
+                  //   // arguments: meal,
+                  // },
                   // child: Column(children: [Expanded(child: Malescard(oneCategory:))]),
                 );
               },
