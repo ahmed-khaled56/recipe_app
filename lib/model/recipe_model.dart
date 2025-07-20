@@ -1,4 +1,4 @@
-class MealModel {
+class DetailesModel {
   final dynamic idMeal;
   final dynamic mealName;
   final dynamic categoryName;
@@ -10,7 +10,7 @@ class MealModel {
   final List<String> mesearus;
   final dynamic youtubeLink;
 
-  MealModel({
+  DetailesModel({
     required this.mesearus,
     required this.youtubeLink,
     required this.idMeal,
@@ -22,7 +22,7 @@ class MealModel {
     required this.ingerdiants,
   });
 
-  factory MealModel.fromJson(json) {
+  factory DetailesModel.fromJson(json) {
     List<String> ingredientsList = [];
 
     for (int i = 1; i <= 20; i++) {
@@ -39,13 +39,13 @@ class MealModel {
         meseaursList.add(mesearus.toString().trim());
       }
     }
-    return MealModel(
-      idMeal: json['idMeal'],
-      mealName: json['strMeal'],
-      categoryName: json['strCategory'],
-      area: json['strArea'],
-      descreption: json['strInstructions'],
-      maleImage: json['strMealThumb'],
+    return DetailesModel(
+      idMeal: json['idMeal'] ?? "",
+      mealName: json['strMeal'] ?? "",
+      categoryName: json['strCategory'] ?? "",
+      area: json['strArea'] ?? "",
+      descreption: json['strInstructions'] ?? "",
+      maleImage: json['strMealThumb'] ?? "",
       youtubeLink: json['strYoutube'] ?? '',
       ingerdiants: ingredientsList,
       mesearus: meseaursList,
@@ -69,10 +69,30 @@ class CategoryModel {
 
   factory CategoryModel.fromJson(jsondata) {
     return CategoryModel(
-      idCategory: jsondata['idCategory'],
-      nameCategory: jsondata['strCategory'],
-      imageCategory: jsondata['strCategoryThumb'],
-      descriptionCategory: jsondata['strCategoryDescription'],
+      idCategory: jsondata['idCategory'] ?? "",
+      nameCategory: jsondata['strCategory'] ?? "",
+      imageCategory: jsondata['strCategoryThumb'] ?? "",
+      descriptionCategory: jsondata['strCategoryDescription'] ?? "",
+    );
+  }
+}
+
+class MealModel {
+  final dynamic idMeal;
+  final dynamic imageMeal;
+  final dynamic nameMeal;
+
+  MealModel({
+    required this.idMeal,
+    required this.imageMeal,
+    required this.nameMeal,
+  });
+
+  factory MealModel.fromJson(jsondata) {
+    return MealModel(
+      idMeal: jsondata['idMeal'] ?? "",
+      imageMeal: jsondata['strMealThumb'] ?? "",
+      nameMeal: jsondata['strMeal'] ?? "",
     );
   }
 }
