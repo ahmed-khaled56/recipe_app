@@ -83,13 +83,12 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 16),
           if (male != null)
             GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailsScreen(), // مرر الوجبة لو عايز
-                  ),
+              onTap: () async {
+                final meal = await GetDetailesservice().getDetailes(
+                  mealName: male!.mealName,
                 );
+
+                Navigator.pushNamed(context, DetailsScreen.id, arguments: meal);
               },
               child: HomeCard(
                 meal: male!,
