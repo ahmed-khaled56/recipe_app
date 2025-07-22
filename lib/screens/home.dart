@@ -4,13 +4,24 @@ import 'package:recipes_app/screens/categoriesScreen.dart';
 import 'package:recipes_app/screens/detailesScreen.dart';
 import 'package:recipes_app/screens/favoritesscreen.dart';
 import 'package:recipes_app/services/List_categoriesService.dart';
+import 'package:recipes_app/services/get_detailesService.dart';
 
 import 'package:recipes_app/widgets/MalesCard.dart';
+import 'package:recipes_app/widgets/home_card.dart';
 import 'package:recipes_app/widgets/searchTextField.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  HomeScreen({super.key});
   static String id = "HomeScreen";
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String? userInput;
+  DetailesModel? male;
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,34 +57,45 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Searchtextfield(),
-          Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(8),
-              itemCount: 10,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 3 / 4,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-              ),
-              itemBuilder: (context, i) {
-                // final Meal meal = dummyMeals[i];
-                return GestureDetector(
-                  // onTap: () {
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const DetailsScreen(),
-                  //     ),
-                  //   );
-                  //   // arguments: meal,
-                  // },
-                  // child: Column(children: [Expanded(child: Malescard(oneCategory:))]),
+          Searchtextfield(
+            onsup: (v) {},
+            controller: controller,
+
+            onpressed: () async {
+              final userInput = controller.text.trim();
+              if (userInput.isNotEmpty) {
+                try {
+                  final meal = await GetDetailesservice().getDetailes(
+                    mealName: userInput,
+                  );
+                  setState(() {
+                    male = DetailesModel.fromJson(meal);
+                  });
+                } catch (e) {
+                  setState(() {
+                    male = null;
+                  });
+                }
+              }
+            },
+          ),
+
+          const SizedBox(height: 16),
+          if (male != null)
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailsScreen(), // مرر الوجبة لو عايز
+                  ),
                 );
               },
+              child: HomeCard(
+                meal: male!,
+              ), // ✅ آمن دلوقتي لأننا تأكدنا إنها مش null
             ),
-          ),
+          if (male == null) Text("no card"),
         ],
       ),
     );

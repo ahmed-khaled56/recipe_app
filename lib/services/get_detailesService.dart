@@ -1,5 +1,4 @@
 import 'package:recipes_app/helper/API.dart';
-import 'package:recipes_app/model/recipe_model.dart';
 
 class GetDetailesservice {
   Future<Map<String, dynamic>> getDetailes({required String mealName}) async {
