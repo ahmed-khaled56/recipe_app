@@ -48,9 +48,12 @@ class _HomeCardBodyState extends State<HomeCardBody> {
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(width: 2),
-          Text(widget.category),
-          SizedBox(width: 2),
+          SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Text(widget.category, style: TextStyle(fontSize: 18)),
+          ),
+          SizedBox(height: 10),
           // اسم الوصفة
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -62,7 +65,7 @@ class _HomeCardBodyState extends State<HomeCardBody> {
                     widget.maleName,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 20,
                     ),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
@@ -85,8 +88,8 @@ class _HomeCardBodyState extends State<HomeCardBody> {
           ),
 
           Padding(
-            padding: const EdgeInsets.only(left: 100),
-            child: Text(widget.area),
+            padding: const EdgeInsets.only(top: 20, left: 350, bottom: 10),
+            child: Text(widget.area, style: TextStyle(fontSize: 16)),
           ),
         ],
       ),
