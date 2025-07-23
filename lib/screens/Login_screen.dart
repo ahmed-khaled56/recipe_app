@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:recipes_app/constants.dart';
+import 'package:recipes_app/screens/Register_screen.dart';
 import 'package:recipes_app/widgets/Custom_button.dart';
 import 'package:recipes_app/widgets/text_form_field.dart';
 
@@ -35,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 // ),
                 Center(
                   child: Text(
-                    'Recipes',
+                    'Food Recipes',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 37,
@@ -122,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomButton(
                       label: "Sign Up",
                       onPressed: () {
-                        // Navigator.pushNamed(context, RegisterScreen.id);
+                        Navigator.pushNamed(context, RegisterScreen.id);
                       },
                     ),
                   ],
