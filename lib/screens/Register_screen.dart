@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:recipes_app/constants.dart';
+import 'package:recipes_app/helper/snack_bar_show.dart';
+import 'package:recipes_app/screens/home.dart';
 import 'package:recipes_app/widgets/Custom_button.dart';
 import 'package:recipes_app/widgets/text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+String? email;
+String? password;
+bool isLoading = false;
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -13,9 +20,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  String? email;
-  String? password;
-  bool isLoading = false;
   GlobalKey<FormState> formkey = GlobalKey();
   @override
   Widget build(BuildContext context) {
@@ -83,29 +87,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     icon: Icon(Icons.login),
                     onPressed: () async {
-                      // if (formkey.currentState!.validate()) {
-                      //   isLoading = true;
-                      //   setState(() {});
+                      if (formkey.currentState!.validate()) {
+                        isLoading = true;
+                        setState(() {});
 
-                      //   try {
-                      //     await RegisterMethod();
-                      //     Navigator.pushNamed(context, chatPage.id,
-                      //         arguments: email);
-                      //   } on FirebaseAuthException catch (e) {
-                      //     if (e.code == 'weak-password') {
-                      //       showSnackBar(
-                      //           context, 'The password provided is too weak.');
-                      //     } else if (e.code == 'email-already-in-use') {
-                      //       showSnackBar(context,
-                      //           'The account already exists for that email.');
-                      //     }
-                      //   } catch (e) {
-                      //     showSnackBar(
-                      //         context, 'There is an error,please try later.');
-                      //   }
-                      //   isLoading = false;
-                      //   setState(() {});
-                      // } else {}
+                        try {
+                          await RegisterMethod();
+                          print('Success!');
+                          Navigator.pushNamed(
+                            context,
+                            HomeScreen.id,
+                            arguments: email,
+                          );
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'weak-password') {
+                            showSnackBar(
+                              context,
+                              'The password provided is too weak.',
+                            );
+                          } else if (e.code == 'email-already-in-use') {
+                            showSnackBar(
+                              context,
+                              'The account already exists for that email.',
+                            );
+                          }
+                        } catch (e) {
+                          showSnackBar(
+                            context,
+                            'There is an error, please try later.\n$e',
+                          );
+                        }
+                        isLoading = false;
+                        setState(() {});
+                      } else {}
                     },
                     label: Text("Register"),
                   ),
@@ -136,4 +150,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+}
+
+Future<void> RegisterMethod() async {
+  final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    email: email!,
+    password: password!,
+  );
 }

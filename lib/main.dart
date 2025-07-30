@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:recipes_app/firebase_options.dart';
 import 'package:recipes_app/screens/Login_screen.dart';
 import 'package:recipes_app/screens/One_categoryScreen.dart';
 import 'package:recipes_app/screens/Register_screen.dart';
@@ -6,8 +8,12 @@ import 'package:recipes_app/screens/categoriesScreen.dart';
 import 'package:recipes_app/screens/detailesScreen.dart';
 import 'package:recipes_app/screens/home.dart';
 
-void main() {
+void main()async {
   runApp(const MealsApp());
+   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class MealsApp extends StatelessWidget {
