@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:recipes_app/constants.dart';
+import 'package:recipes_app/helper/snack_bar_show.dart';
 import 'package:recipes_app/screens/Register_screen.dart';
+import 'package:recipes_app/screens/home.dart';
 import 'package:recipes_app/widgets/Custom_button.dart';
 import 'package:recipes_app/widgets/text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+String? email;
+String? password;
+bool isLoading = false;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,9 +21,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String? email;
-  String? password;
-  bool isLoading = false;
   GlobalKey<FormState> formkey = GlobalKey();
   @override
   Widget build(BuildContext context) {
@@ -84,27 +88,34 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     icon: Icon(Icons.login),
                     onPressed: () async {
-                      // if (formkey.currentState!.validate()) {
-                      //   isLoading = true;
-                      //   setState(() {});
+                      if (formkey.currentState!.validate()) {
+                        isLoading = true;
+                        setState(() {});
 
-                      //   try {
-                      //     await loginMethod();
+                        try {
+                          await LoginMethod();
 
-                      //     Navigator.pushNamed(context, chatPage.id,
-                      //         arguments: email);
-                      //   } on FirebaseAuthException catch (e) {
-                      //     if (e.code == 'user-not-found') {
-                      //       showSnackBar(
-                      //           context, 'No user found for that email');
-                      //     } else if (e.code == 'wrong-password') {
-                      //       showSnackBar(context,
-                      //           'Wrong password provided for that user.');
-                      //     }
-                      //   }
-                      //   isLoading = false;
-                      //   setState(() {});
-                      // } else {}
+                          Navigator.pushNamed(
+                            context,
+                            HomeScreen.id,
+                            arguments: email,
+                          );
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            showSnackBar(
+                              context,
+                              'No user found for that email',
+                            );
+                          } else if (e.code == 'wrong-password') {
+                            showSnackBar(
+                              context,
+                              'Wrong password provided for that user.',
+                            );
+                          }
+                        }
+                        isLoading = false;
+                        setState(() {});
+                      } else {}
                     },
                     label: Text("Sign In"),
                   ),
@@ -135,4 +146,11 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
+
+Future<void> LoginMethod() async {
+  final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email: email!,
+    password: password!,
+  );
 }
