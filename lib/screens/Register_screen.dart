@@ -93,7 +93,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                         try {
                           await RegisterMethod();
-                          print('Success!');
+                          if (!mounted) return;
+                          // print('Success!');
                           Navigator.pushNamed(
                             context,
                             HomeScreen.id,
@@ -153,8 +154,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 }
 
 Future<void> RegisterMethod() async {
-  final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: email!,
-    password: password!,
-  );
+  UserCredential credential = await FirebaseAuth.instance
+      .createUserWithEmailAndPassword(email: email!, password: password!);
+  User? firebaseUser = credential.user;
+  if (firebaseUser != null) {
+    print(firebaseUser.email);
+
+    // هنا تقدر تبعت البيانات دي لـ PigeonUserDetailes لو محتاج
+  }
 }
