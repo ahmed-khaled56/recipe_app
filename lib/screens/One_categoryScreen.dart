@@ -15,8 +15,8 @@ class OneCategoryscreen extends StatefulWidget {
 class _OneCategoryscreenState extends State<OneCategoryscreen> {
   @override
   Widget build(BuildContext context) {
-    List<MealModel> oneCategoryList =
-        ModalRoute.of(context)!.settings.arguments as List<MealModel>;
+    List<DetailesModel> oneCategoryList =
+        ModalRoute.of(context)!.settings.arguments as List<DetailesModel>;
     return Scaffold(
       appBar: AppBar(title: const Text('Meals ')),
 
@@ -33,7 +33,7 @@ class _OneCategoryscreenState extends State<OneCategoryscreen> {
           return GestureDetector(
             onTap: () async {
               final detailes = await GetDetailesservice().getDetailes(
-                mealName: oneCategoryList[i].nameMeal,
+                mealName: oneCategoryList[i].mealName,
               );
 
               Navigator.pushNamed(

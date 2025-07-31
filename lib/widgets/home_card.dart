@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipes_app/model/recipe_model.dart';
 import 'package:recipes_app/screens/detailesScreen.dart';
+import 'package:recipes_app/services/addMealFavService.dart';
 import 'package:recipes_app/widgets/MaleCardBody.dart';
 import 'package:recipes_app/widgets/home_card_body.dart';
 
@@ -18,11 +19,15 @@ class _HomeCardState extends State<HomeCard> {
   @override
   Widget build(BuildContext context) {
     return HomeCardBody(
-      onPressed: () {
+      onPressed: () async {
         setState(() {
           isFavorite = !isFavorite;
         });
+        if (isFavorite) {
+          await Addmealfavservice().addmealToFav(widget.meal);
+        }
       },
+      isFavorite: isFavorite,
 
       // isFavorite: isFavorite,
       image: widget.meal.maleImage,

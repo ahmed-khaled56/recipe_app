@@ -10,6 +10,7 @@ class HomeCardBody extends StatefulWidget {
 
   final String area;
 
+  final bool isFavorite;
   final String category;
 
   HomeCardBody({
@@ -21,6 +22,7 @@ class HomeCardBody extends StatefulWidget {
     required this.onPressed,
     required this.area,
     required this.category,
+    required this.isFavorite,
   });
 
   @override
@@ -28,8 +30,6 @@ class HomeCardBody extends StatefulWidget {
 }
 
 class _HomeCardBodyState extends State<HomeCardBody> {
-  bool isFavorite = false;
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -74,14 +74,10 @@ class _HomeCardBodyState extends State<HomeCardBody> {
                 SizedBox(width: 2),
                 IconButton(
                   icon: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: isFavorite ? Colors.red : Colors.grey,
+                    widget.isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: widget.isFavorite ? Colors.red : Colors.grey,
                   ),
-                  onPressed: () {
-                    setState(() {
-                      isFavorite = !isFavorite;
-                    });
-                  },
+                  onPressed: widget.onPressed,
                 ),
               ],
             ),

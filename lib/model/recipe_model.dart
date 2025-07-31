@@ -51,6 +51,9 @@ class DetailesModel {
       mesearus: meseaursList,
     );
   }
+  Map<String, dynamic> toJson() {
+    return {'idMeal': idMeal, 'strMealThumb': maleImage, 'strMeal': mealName};
+  }
 }
 ///////////////////////////////////////////////////////
 
@@ -94,5 +97,9 @@ class MealModel {
       imageMeal: jsondata['strMealThumb'] ?? "",
       nameMeal: jsondata['strMeal'] ?? "",
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'idMeal': idMeal, 'strMealThumb': imageMeal, 'strMeal': nameMeal};
   }
 }

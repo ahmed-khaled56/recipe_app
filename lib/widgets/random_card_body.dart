@@ -5,6 +5,7 @@ class RandomCardBody extends StatefulWidget {
 
   final String image;
   VoidCallback? onPressed;
+  final bool isFavorite;
 
   final String maleName;
 
@@ -21,6 +22,7 @@ class RandomCardBody extends StatefulWidget {
     required this.onPressed,
     required this.area,
     required this.category,
+    required this.isFavorite,
   });
 
   @override
@@ -28,8 +30,6 @@ class RandomCardBody extends StatefulWidget {
 }
 
 class _RandomCardBodyState extends State<RandomCardBody> {
-  bool isFavorite = false;
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -74,14 +74,10 @@ class _RandomCardBodyState extends State<RandomCardBody> {
                 SizedBox(width: 2),
                 IconButton(
                   icon: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: isFavorite ? Colors.red : Colors.grey,
+                    widget.isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: widget.isFavorite ? Colors.red : Colors.grey,
                   ),
-                  onPressed: () {
-                    setState(() {
-                      isFavorite = !isFavorite;
-                    });
-                  },
+                  onPressed: widget.onPressed,
                 ),
               ],
             ),

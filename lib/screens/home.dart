@@ -41,8 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   setState(() {
                     male = DetailesModel.fromJson(meal);
                   });
-                 
                 } catch (e) {
                   setState(() {
                     male = null;

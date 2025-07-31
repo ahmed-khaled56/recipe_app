@@ -9,8 +9,8 @@ class Getonecateugoryservice {
 
     List<dynamic> oneCategoriesJson = onecategoryList["meals"];
 
-    List<MealModel> oneCategoryList =
-        oneCategoriesJson.map((item) => MealModel.fromJson(item)).toList();
+    List<DetailesModel> oneCategoryList =
+        oneCategoriesJson.map((item) => DetailesModel.fromJson(item)).toList();
     return oneCategoryList;
   }
 }

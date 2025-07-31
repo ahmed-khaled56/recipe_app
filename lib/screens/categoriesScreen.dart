@@ -26,7 +26,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             builder: (context) {
               return GestureDetector(
                 onTap: () async {
-                  List<dynamic> oneCategoryList = await Getonecateugoryservice()
+                  final oneCategoryList = await Getonecateugoryservice()
                       .getOneCategory(
                         categoryName: categoryList[index].nameCategory,
                       );

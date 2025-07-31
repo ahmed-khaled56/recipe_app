@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:recipes_app/model/recipe_model.dart';
 import 'package:recipes_app/screens/detailesScreen.dart';
+import 'package:recipes_app/services/addMealFavService.dart';
 import 'package:recipes_app/widgets/MaleCardBody.dart';
 
 class Malescard extends StatefulWidget {
   Malescard({super.key, required this.oneCategory});
-  MealModel? oneCategory;
+  DetailesModel oneCategory;
 
   @override
   State<Malescard> createState() => _MalescardState();
@@ -17,15 +18,19 @@ class _MalescardState extends State<Malescard> {
   @override
   Widget build(BuildContext context) {
     return Malecardbody(
-      onPressed: () {
+      onPressed: () async {
         setState(() {
           isFavorite = !isFavorite;
         });
+        if (isFavorite) {
+          await Addmealfavservice().addmealToFav(widget.oneCategory);
+        }
       },
+      isFavorite: isFavorite,
 
       // isFavorite: isFavorite,
-      image: widget.oneCategory!.imageMeal,
-      maleName: widget.oneCategory!.nameMeal,
+      image: widget.oneCategory.maleImage,
+      maleName: widget.oneCategory.mealName,
     );
   }
 }
