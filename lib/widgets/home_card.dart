@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipes_app/model/recipe_model.dart';
 import 'package:recipes_app/screens/detailesScreen.dart';
 import 'package:recipes_app/services/addMealFavService.dart';
+import 'package:recipes_app/services/isAddMealAService.dart';
 import 'package:recipes_app/services/removeFavMealService.dart';
 import 'package:recipes_app/widgets/MaleCardBody.dart';
 import 'package:recipes_app/widgets/home_card_body.dart';
@@ -17,6 +18,20 @@ class HomeCard extends StatefulWidget {
 class _HomeCardState extends State<HomeCard> {
   @override
   bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkIfFavorite();
+  }
+
+  void checkIfFavorite() async {
+    bool fav = await Isaddmealaservice().isMealFavorite(widget.meal.idMeal);
+    setState(() {
+      isFavorite = fav;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return HomeCardBody(

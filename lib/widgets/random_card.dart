@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipes_app/model/recipe_model.dart';
 import 'package:recipes_app/services/addMealFavService.dart';
+import 'package:recipes_app/services/isAddMealAService.dart';
 import 'package:recipes_app/services/removeFavMealService.dart';
 
 import 'package:recipes_app/widgets/random_card_body.dart';
@@ -16,6 +17,19 @@ class RandomCard extends StatefulWidget {
 class _RandomCardState extends State<RandomCard> {
   @override
   bool isFavorite = false;
+  @override
+  void initState() {
+    super.initState();
+    checkIfFavorite();
+  }
+
+  void checkIfFavorite() async {
+    bool fav = await Isaddmealaservice().isMealFavorite(widget.meal.idMeal);
+    setState(() {
+      isFavorite = fav;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return RandomCardBody(

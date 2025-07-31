@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipes_app/model/recipe_model.dart';
 import 'package:recipes_app/screens/detailesScreen.dart';
 import 'package:recipes_app/services/addMealFavService.dart';
+import 'package:recipes_app/services/isAddMealAService.dart';
 import 'package:recipes_app/services/removeFavMealService.dart';
 import 'package:recipes_app/widgets/MaleCardBody.dart';
 
@@ -16,6 +17,21 @@ class Malescard extends StatefulWidget {
 class _MalescardState extends State<Malescard> {
   @override
   bool isFavorite = false;
+  @override
+  void initState() {
+    super.initState();
+    checkIfFavorite();
+  }
+
+  void checkIfFavorite() async {
+    bool fav = await Isaddmealaservice().isMealFavorite(
+      widget.oneCategory.idMeal,
+    );
+    setState(() {
+      isFavorite = fav;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Malecardbody(
