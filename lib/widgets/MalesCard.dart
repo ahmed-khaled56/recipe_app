@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipes_app/model/recipe_model.dart';
 import 'package:recipes_app/screens/detailesScreen.dart';
 import 'package:recipes_app/services/addMealFavService.dart';
+import 'package:recipes_app/services/removeFavMealService.dart';
 import 'package:recipes_app/widgets/MaleCardBody.dart';
 
 class Malescard extends StatefulWidget {
@@ -24,6 +25,10 @@ class _MalescardState extends State<Malescard> {
         });
         if (isFavorite) {
           await Addmealfavservice().addmealToFav(widget.oneCategory);
+        } else {
+          await Removefavmealservice().removeMealFromFav(
+            widget.oneCategory.idMeal,
+          );
         }
       },
       isFavorite: isFavorite,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipes_app/model/recipe_model.dart';
 import 'package:recipes_app/services/addMealFavService.dart';
+import 'package:recipes_app/services/removeFavMealService.dart';
 
 import 'package:recipes_app/widgets/random_card_body.dart';
 
@@ -25,6 +26,8 @@ class _RandomCardState extends State<RandomCard> {
 
         if (isFavorite) {
           await Addmealfavservice().addmealToFav(widget.meal);
+        } else {
+          await Removefavmealservice().removeMealFromFav(widget.meal.idMeal);
         }
       },
       isFavorite: isFavorite,
