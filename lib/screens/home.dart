@@ -4,17 +4,19 @@ import 'package:recipes_app/screens/categoriesScreen.dart';
 import 'package:recipes_app/screens/detailesScreen.dart';
 import 'package:recipes_app/screens/favoritesscreen.dart';
 import 'package:recipes_app/services/List_categoriesService.dart';
+import 'package:recipes_app/services/fetchFavMeals.dart';
 import 'package:recipes_app/services/get_detailesService.dart';
 import 'package:recipes_app/services/get_random_meals.dart';
+import 'package:recipes_app/services/isAddMealAService.dart';
 
 import 'package:recipes_app/widgets/home_card.dart';
 import 'package:recipes_app/widgets/random_males.dart';
 import 'package:recipes_app/widgets/searchTextField.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key, this.RandonmMeals});
+  HomeScreen({super.key});
   static String id = "HomeScreen";
-  final DetailesModel? RandonmMeals;
+  //final DetailesModel? RandonmMeals;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -25,9 +27,14 @@ class _HomeScreenState extends State<HomeScreen> {
   DetailesModel? male;
   TextEditingController controller = TextEditingController();
   List<DetailesModel>? randomMealsList;
+  bool isFavorite = false;
+
   void initState() {
     super.initState();
-    _loadRandomMeals(); // منادي دالة الـ async
+    setState(() {
+      _loadRandomMeals();
+    });
+    // منادي دالة الـ async
   }
 
   Future<void> _loadRandomMeals() async {
@@ -49,7 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.favorite),
-            onPressed: () {
+            onPressed: () async {
+              await FavoriteService().streamFavoriteMeals();
               Navigator.push(
                 context,
                 MaterialPageRoute(

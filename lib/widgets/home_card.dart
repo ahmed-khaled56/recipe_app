@@ -8,7 +8,7 @@ import 'package:recipes_app/widgets/MaleCardBody.dart';
 import 'package:recipes_app/widgets/home_card_body.dart';
 
 class HomeCard extends StatefulWidget {
-  HomeCard({super.key, required this.meal});
+  HomeCard({required this.meal}) : super(key: ValueKey(meal.idMeal));
   DetailesModel meal;
 
   @override
@@ -27,6 +27,7 @@ class _HomeCardState extends State<HomeCard> {
 
   void checkIfFavorite() async {
     bool fav = await Isaddmealaservice().isMealFavorite(widget.meal.idMeal);
+    if (!mounted) return;
     setState(() {
       isFavorite = fav;
     });
@@ -55,3 +56,37 @@ class _HomeCardState extends State<HomeCard> {
     );
   }
 }
+// class HomeCard extends StatelessWidget {
+//   final DetailesModel meal;
+//   HomeCard({required this.meal});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return FutureBuilder<bool>(
+//       future: Isaddmealaservice().isMealFavorite(meal.idMeal),
+//       builder: (context, snapshot) {
+//         bool isFavorite = snapshot.data ?? false;
+
+//         return HomeCardBody(
+//           image: meal.maleImage,
+//           maleName: meal.mealName,
+//           category: meal.categoryName,
+//           area: meal.area,
+//           isFavorite: isFavorite,
+//           onPressed: () async {
+//             // قلب الحالة
+//             bool newValue = !isFavorite;
+//             if (newValue) {
+//               await Addmealfavservice().addmealToFav(meal);
+//             } else {
+//               await Removefavmealservice().removeMealFromFav(meal.idMeal);
+//             }
+
+//             // بعد التغيير، خليه يعمل rebuild للشاشة
+//             (context as Element).markNeedsBuild();
+//           },
+//         );
+//       },
+//     );
+//   }
+// }

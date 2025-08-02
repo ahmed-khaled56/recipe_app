@@ -11,7 +11,7 @@ class GetDetailesservice {
     // List<DetailesModel> AlldetailesList =
     //     detailesList.map((item) => DetailesModel.fromJson(item)).toList();
     if (detailesList != null && detailesList.isNotEmpty) {
-      return detailesList[0]; // ✅ meal موجود
+      return detailesList[0]; // meal موجود
     } else {
       throw Exception("Meal not found");
     }

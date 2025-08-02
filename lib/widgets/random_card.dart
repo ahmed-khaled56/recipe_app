@@ -7,7 +7,7 @@ import 'package:recipes_app/services/removeFavMealService.dart';
 import 'package:recipes_app/widgets/random_card_body.dart';
 
 class RandomCard extends StatefulWidget {
-  RandomCard({super.key, required this.meal});
+  RandomCard({required this.meal}) : super(key: ValueKey(meal.idMeal));
   DetailesModel meal;
 
   @override
@@ -25,6 +25,7 @@ class _RandomCardState extends State<RandomCard> {
 
   void checkIfFavorite() async {
     bool fav = await Isaddmealaservice().isMealFavorite(widget.meal.idMeal);
+    if (!mounted) return;
     setState(() {
       isFavorite = fav;
     });

@@ -7,7 +7,8 @@ import 'package:recipes_app/services/removeFavMealService.dart';
 import 'package:recipes_app/widgets/MaleCardBody.dart';
 
 class Malescard extends StatefulWidget {
-  Malescard({super.key, required this.oneCategory});
+  Malescard({required this.oneCategory})
+    : super(key: ValueKey(oneCategory.idMeal));
   DetailesModel oneCategory;
 
   @override
@@ -27,6 +28,7 @@ class _MalescardState extends State<Malescard> {
     bool fav = await Isaddmealaservice().isMealFavorite(
       widget.oneCategory.idMeal,
     );
+    if (!mounted) return;
     setState(() {
       isFavorite = fav;
     });
